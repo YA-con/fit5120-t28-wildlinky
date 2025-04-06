@@ -5,9 +5,167 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F7F1E7;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.mlr-auto {
+  margin: 0 auto;
+}
+
+.ml-4 {
+  margin-left: 4px;
+}
+.mr-4 {
+  margin-right: 4px;
+}
+.pl-10 {
+  padding-left: 10px;
+}
+.pr-10 {
+  padding-right: 10px;
+}
+.pl-20 {
+  padding-left: 20px;
+}
+.pr-20 {
+  padding-right: 20px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-wid {
+  flex: 1;
+  min-width: 1upx;
+}
+.flex-hei {
+  flex: 1;
+  min-height: 1upx;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.items-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.color_9 {
+  color: #999;
+}
+.color_f {
+  color: #fff;
+}
+.color_9d2a {
+  color: #9D2A1A;
+}
+
+.f12 {
+  font-size: 12px;
+}
+.f13 {
+  font-size: 13px;
+}
+.f14 {
+  font-size: 14px;
+}
+.f16 {
+  font-size: 16px;
+}
+.f18 {
+  font-size: 18px;
+}
+.f24 {
+  font-size: 24px;
+}
+
+.f_weight {
+  font-weight: bold;
+}
+.txt-center {
+  text-align: center;
+}
+.txt-right {
+  text-align: right;
+}
+.border-bottom {
+  position: relative;
+}
+
+.border-bottom::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #EEEFEE;
+  left: 0;
+  bottom: 0;
+  transform: scaleY(.7);
 }

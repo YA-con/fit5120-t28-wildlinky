@@ -1,0 +1,58 @@
+.container {
+    padding: 0 64px 188px;
+}
+
+.banner {
+    height: 513px;
+    margin: 0 -64px;
+    background-image: url('https://s3-alpha-sig.figma.com/img/4b75/5095/bce992ea46e4f6bcfcb020bd44fd59fa?Expires=1744588800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AYXseYl233Rg5t4bEO9xSLHixuramld4CATkNjCnwgc4xtsSkxG4LxLglenacfGyEQp53db47HrAUsU8nngX8Xo~S38aGjKIUTT5SxO3~~4do0eHyiOeUW-jAV0At8xcUaiEobavmkl~urFT4J-aiCLqONrDTMeh0PVw1dNPQf6szSDcJ3YdlQUIB8ezaDEDMPe3AB4Fc0QSLosqWwUJJc~yxyam6mGVB-S34wiNtgkSFIT-VbMjjqT3pd3~PKCfIWyqHDSHRiw0j38DdQkb6UNW~1uYc3a22umu6LrFjdIOLDf7VfdWyHc-OQfSQcnAunT0WidxTAB9JGYno9~r8A__');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, .3);
+    z-index: 0;
+}
+.bannerTxtBox {
+    background: #F9CF39;
+    width: 680px;
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    left: 10%;
+    bottom: 30%;
+    padding: 16px;
+}
+.bannerTxt {
+    color: #fff;
+    font-size: 24px;
+    position: absolute;
+    left: 10%;
+    bottom: 15%;
+}
+
+.title {
+    padding: 124px 0 0;
+    color: #07431E;
+    font-size: 40px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.card {
+    width: 20%;
+    margin: 32px 20px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.testImg {
+    width: 884px;
+    display: block;
+    margin: 32px auto 0;
+}
