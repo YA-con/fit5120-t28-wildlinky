@@ -17,7 +17,7 @@ const Layout = () => {
             <Routes>
                 <Route index element={<Home />} />
                 <Route path="email" element={<Email />} />
-                <Route path="exploreSpecies" element={<ExploreSpecies />} />
+                <Route path="explore-species" element={<ExploreSpecies />} />
                 <Route path="stories" element={<Stories />} />
                 <Route path="take-action" element={<TakeAction />} />
                 <Route path="wireframe" element={<Wireframe />} />

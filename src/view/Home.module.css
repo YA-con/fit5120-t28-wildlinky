@@ -182,3 +182,42 @@
     cursor: pointer;
     margin: 0 auto;
 }
+
+.other {
+    background-color: #E4EFE7;
+    padding: 48px 114px;
+    margin: 64px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.other>div {
+    width: 50%;
+    padding: 12px 0;
+}
+.other img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.otherBtn {
+    padding: 10px 48px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #07431E;
+    margin: 0 auto;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.footer {
+    padding: 48px 114px 32px;
+    background-color: #07431E;
+    color: #fff;
+}
+
+.footer span {
+    padding-bottom: 12px;
+    font-size: 20px;
+    margin-right: 20px;
+}

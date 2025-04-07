@@ -124,6 +124,34 @@ const Home = () => {
             <section>
                 <div className={styles.searchNow}>See All Stories</div>
             </section>
+
+            <section className={styles.other}>
+                <div className='items-center'>
+                    <img alt='img' src='https://s3-alpha-sig.figma.com/img/f59c/1ee0/e52d2e22e614688db66a2419f7ed096f?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=V0eBAKO4qgfEw5UkE7-vkX4CoRyALr9wUpoeBqdttBJS0aprvfb0XR1mIQKbVSODscMvKPxpT0ixClwjMw905zuD57QRrIfmD7fU3zFjXiljn8eyDMuh1SSY61aMsK71XPRIUQvo4TYPwGMT4cH~qLGKF0us-EWH29enzuTMA-lyUe56~ARwnfMPREISAB8GS8xo0sSiG28~2eAxSf2cgchsEAziH8a~WHiBMPz~ft4R00gu9ZgnVkY7Bou7YfpVXjJcgO-a3-J-pgH4e4UeN08uFzr1Lg4MYDn53SP3jzE1Xpha2ObMP1sibxLALHL-L4GR0xFU8VRuR91kO6qkDA__' />
+                    <span className='f28 ml-20'>Atlas of Living Australia</span>
+                </div>
+                <div className='items-center'>
+                    <img alt='img' src='https://s3-alpha-sig.figma.com/img/2cb8/07ad/03153179cfe78be9e9496ba8eb04e58a?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Gqen7upmQbSp9J3hGs-IdYUJFQQ4mWtuLB5SvAWTMDt2PC0fjla1D-qsuGfd0onYpaYyYJek55SILqAGFWTkDZJSpYvH8Xyxd28mx25pG9~yGtrXbdNhseb5q0kCNJF3ZhMrSllLJH4bTpdoMTTYUC1nEj1RTT9sVX-2mlxpY6KFHqvghwwhZED~RnD~T9EYlEyi2D7jJXrFaN6RjVDk8HkDdFSAlZAb3aNa0oVNpIbm45kLhWSBdYUOO-8oJAELw9bIBNg83UygH5itIoBEpPirUKs9lg7mkhN53ED~NE0~Yvoi6-YyI3Et-GmAAwnPWlfbiUzeru60AhRWIjrRaw__' />
+                    <span className='f28 ml-20'>WIRES</span>
+                </div>
+                <div className='items-center'>
+                    <span className='f28 mr-20'>Bush Heritage Australia</span>
+                    <img alt='img' src='https://s3-alpha-sig.figma.com/img/b358/2692/888d63c43de8772fff1701dd1b320e3c?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=B22GMlK6Dpm6K01VnFpFKQehj2AlQAjjwW8-bPjP5umJscCz0gXcktY-K35g5fqYz341bOXmCN-7LqxeF8K4a9TlwhUtwiylLCxGeSEh9fwe5korgzw8E~1SFjUQgSpbBc7V8NPCIB2KMcaZWpjwFsNJQggzLqDPIrKmtNoM9w-m3-madkExN3Qz6-5P1Bx2P42RhaCo3Dn4sY0yV-D5QRSXZmpj7HSHRVbiApGYQcgpk4rX1zEKNXc8VhLX5npkZdNTIfC43TIR0b6zQAFMwtu38OFO7qGfhYMbwqKA50m6~U5CD65~8pnd0g13dT8HGDhtE8nDcUE-Qbi5dv8vAA__' />
+                </div>
+                <div className='items-center'>
+                    <div className={styles.otherBtn}>Become a Partner</div>
+                </div>
+            </section>
+
+            <section className={styles.footer}>
+                <div className='items-center'>
+                    <span>About</span>
+                    <span>Contact</span>
+                    <span>Privacy</span>
+                    <span>FAQ</span>
+                </div>
+                <div>© 2025 Protecting Life on Land | Based in Australia | Designed for SDG 15 Impact</div>
+            </section>
         </main>
     )
 }

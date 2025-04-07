@@ -3,6 +3,9 @@
     position: relative;
     height: 96px;
     padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 .logo_wrap {
     width: 135px;
@@ -33,4 +36,23 @@
 .nav_btn {
     margin-left: 24px;
     cursor: pointer;
+}
+
+.closeIcon {
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: auto;
+}
+.drawerRow {
+    border-bottom: 1px solid #D9D9D9;
+    padding: 20px 0;
+    cursor: pointer;
+    font-size: 18px;
+    color: #07431E;
+    font-weight: bold;
+}
+
+.drawerRow:hover {
+    color: #F9CF39;
 }
