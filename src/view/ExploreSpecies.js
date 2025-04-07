@@ -5,6 +5,7 @@ import {
     SearchOutlined
 } from '@ant-design/icons'
 import LineChart from '../components/LineChart'
+import MapBox from '../components/MapBox'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
@@ -101,7 +102,7 @@ const ExploreSpecies = () => {
                     <section className={styles.cardBtn}>Read More</section>
                 </section>
                 <section className={styles.mapbox}>
-                    <img alt='mapbox' src='https://s3-alpha-sig.figma.com/img/cba1/1cf8/f11bcbc44cb526566887683ca0b7898b?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=CWNy6lSfjhYlfBN~fNism3Rid8qgM-hgORA0P-G3ntAoXRw~hwYdJ9pzCaTK~dt14CwRqSoPwUMp8IXqi2-qdGV9f6Nlv0DR7gTlKFxnYgAyfgIxwn6u0bP-aV3Qab2o9EqsvICB-fNxoCgMtkA02-xO8xXvnHU-HiFPd4fHuXYvBL-sWLxUhnB3hB4qVjh5soG6bSqB13emhrqxS0V9pH3L6YpP9tTKBm7HNIEQQ7ESXgA~b2~9nULv1qrmA~45fcjLdlG0X32Yg19VzZrp6OU127-DsSxOh3cczrCCNa00B2I9vJV-XU4cfLGahk9551vbUGBiJj5wMc429QkKBA__'></img>
+                    <MapBox />
                 </section>
             </section>
 
