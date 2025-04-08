@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './ExploreSpecies.module.css'
 import { Select, Input } from 'antd'
 import {
@@ -12,6 +12,39 @@ import jsPDF from 'jspdf'
 
 const ExploreSpecies = () => {
     const pdfRef = useRef()
+    const [query, setQuery] = useState({
+        year: '',
+        postcode: '',
+        species_id: 1
+    })
+    const [info, setInfo] = useState({})
+
+    // choose species
+    const handleChooseSpecies = async (species_id) => {
+        setQuery({
+            ...query,
+            species_id
+        })
+
+        handleGetSpeciesInfo()
+    }
+
+    // get species info
+    const handleGetSpeciesInfo = async () => {
+        let params = new URLSearchParams()
+        
+        params.append('year', query.year)
+        params.append('postcode', query.postcode)
+        params.append('species_id', query.species_id)
+
+        try {
+            const resp = await fetch('https://fit5120-t28-wildlinky.onrender.com:5000/api/species-locations?' + params.toString())
+            setInfo(resp.data)
+        } catch (e) {
+
+        }
+
+    }
 
     const handleExportChart = () => {
         const input = pdfRef.current
@@ -38,7 +71,7 @@ const ExploreSpecies = () => {
                     Search by location, explore interactive maps, and learn how each species is impacted — and how you can help.
                 </div>
             </section>
-            <section className={styles.findBox}>
+            {/* <section className={styles.findBox}>
                 <section className={styles.title}>Find Endangered Wildlife Near You</section>
                 <section className={`items-center`}>
                     <Select
@@ -79,24 +112,48 @@ const ExploreSpecies = () => {
                         <div className='color_6 ptb-2'>Striped Legless Lizard</div>
                     </div>
                 </section>
-            </section>
+            </section> */}
             <section className='f40 f_weight mt-64 mb-32'>Discover Their Habitat Zones</section>
             <section className='flex'>
                 <section className='flex-wid mr-20'>
-                    <Input
-                        className={styles.formWrap}
-                        suffix={<SearchOutlined />}
-                    ></Input>
+                    <section className='items-center'>
+                        <Input
+                            className={styles.formWrap}
+                            suffix={<SearchOutlined />}
+                            placeholder='SELECT POSTCODE'
+                        ></Input>
+                        <Select
+                            className={styles.formWrap}
+                            placeholder="SELECT SPECIES"
+                            value={query.species_id}
+                            onChange={handleChooseSpecies}
+                            options={[
+                                {
+                                    value: 1,
+                                    label: 'option one'
+                                }, {
+                                    value: 2,
+                                    label: 'option 2'
+                                }, {
+                                    value: 3,
+                                    label: 'option 3'
+                                }, {
+                                    value: 4,
+                                    label: 'option 4'
+                                }
+                            ]}
+                        ></Select>
+                    </section>
                     <section className={styles.card}>
-                        <img alt='img' src='https://s3-alpha-sig.figma.com/img/cabf/fe8d/c53a0182f79fb3c8524ad8b8256d5a1e?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=jIoTopREffnQWAPHb~n6yd0Di8s-gMVCXKHQHepXfRiLCQwaCMor-6LVng0wUpXZhFYSyhSVSdTXjF~~cFpDYBUR1lhj1KNY8p69V7wXa6xBTjAn~QhLp1WOA4sZDP8mOgVysPeHwVXdjYA504sy0O1CDeIut6r1r3TKwufswIrojlw1e6zZyj8EP8Ax4EcgrYyVjzwndwRxpE7JOR9bG~MT1-xeaNf2zMf-u-u0LG8gtGD3wri1eu5qbrzywJUgfgBTuKaxvkDnZ~T7UiE1jmPApGZEZwYetIv8iwtx~5KdUkDHs6vfHG8TOibjopsOsG40R1VeQaGKdM8PHomoUA__' />
-                        <div className={styles.cartTitle}>Koala</div>
-                        <div className='f20'>Status: Vulnerable</div>
-                        <div className='f20'>Habitat: Eucalyptus forests in QLD, NSW, VIC</div>
+                        <img alt='img' src={ info.image_url } />
+                        <div className={styles.cartTitle}>{info.name}</div>
+                        <div className='f20'>Status: {info.epbcstatus}</div>
+                        <div className='f20'>State: {info.state}</div>
+                        <div className='f20'>Habitat: {info.eco_type}</div>
                         <div className='f20'>Main Threats:</div>
                         <ul>
-                            <li>Habitat destruction from urban development</li>
-                            <li>Bushfires and climate change</li>
-                            <li>Disease (chlamydia), car collisions, dog attacks</li>
+                            <li>{info.threats}</li>
+                            <li>{info.description }</li>
                         </ul>
                     </section>
                     <section className={styles.cardBtn}>Read More</section>
