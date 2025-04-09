@@ -120,7 +120,7 @@ const ExploreSpecies = () => {
                         <Input
                             className={styles.formWrap}
                             suffix={<SearchOutlined />}
-                            placeholder='SELECT POSTCODE'
+                            placeholder='Input POSTCODE in VIC'
                         ></Input>
                         <Select
                             className={styles.formWrap}
