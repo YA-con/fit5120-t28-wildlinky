@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from supabase import create_client
 import math
-import os
 
 app = Flask(__name__)
 CORS(app)
@@ -12,11 +11,11 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRj
 
 supabase = create_client(url, key)
 
-# 
+
 cached_species_locations = []
 cached_species_summary = {}
 
-#  species_locations 
+
 def get_all_species_locations():
     all_data = []
     batch_size = 1000
@@ -39,28 +38,28 @@ def get_all_species_locations():
 
     return all_data
 
-#  species_locations 
+
 def load_species_data():
     global cached_species_locations
     cached_species_locations = get_all_species_locations()
     print(f"[INIT] Loaded {len(cached_species_locations)} species location records into cache.")
 
-#  summary 
+
 def load_species_summary():
     global cached_species_summary
 
     print("[INIT] Calculating species summary...")
 
-    #   threatened_species
+    
     threatened_res = supabase.table("threatened_species").select("*").execute()
     threatened_species_data = threatened_res.data
     species_lookup = {s['species_id']: s['name'] for s in threatened_species_data}
 
-    # suburb_locations
+
     suburb_res = supabase.table("suburb_locations").select("id, suburb, lat, long").execute()
     suburb_data = suburb_res.data
 
-    # get suburb lat and long
+   
     suburb_coords = {}
     for s in suburb_data:
         name = s.get('suburb')
@@ -70,7 +69,7 @@ def load_species_summary():
             if lat is not None and lon is not None:
                 suburb_coords[name] = {"lat": lat, "long": lon}
 
-    # match suburb
+    
     def find_nearest_suburb(lat, lon):
         min_distance = float('inf')
         nearest_suburb = None
@@ -96,7 +95,7 @@ def load_species_summary():
         if not suburb or suburb in suburb_seen:
             continue
 
-        # suburb
+        
         suburb_records = [
             i for i in cached_species_locations
             if find_nearest_suburb(i.get('lat'), i.get('long')) == suburb
@@ -104,7 +103,7 @@ def load_species_summary():
 
         total_count = len(suburb_records)
 
-        # species_id
+       
         species_count = {}
         for rec in suburb_records:
             sid = rec.get('species_id')
@@ -120,7 +119,7 @@ def load_species_summary():
             for sid, count in species_count.items()
         ]
 
-        #  suburb
+        
         suburb_lat = suburb_coords.get(suburb, {}).get('lat')
         suburb_lon = suburb_coords.get(suburb, {}).get('long')
 
@@ -142,12 +141,12 @@ def load_species_summary():
     print(f"[INIT] Summary ready. Suburbs counted: {len(suburb_results)}")
 
 
-# summary
+
 @app.route('/api/species-summary', methods=['GET'])
 def get_species_summary():
     return jsonify(cached_species_summary)
 
-# time series
+
 @app.route('/api/species-locations/timeseries', methods=['GET'])
 def get_species_timeseries():
     species_id = request.args.get('species_id')
@@ -178,16 +177,16 @@ def get_filtered_species_locations():
     result_data = []
     species_info = None
 
-    #  threatened_species
+    
     threatened_res = supabase.table("threatened_species").select("*").execute()
     threatened_species_list = threatened_res.data
     species_map_full = {s['species_id']: s for s in threatened_species_list}
 
-    #  species_id postcode
+    
     if species_id:
         species_info = species_map_full.get(species_id)
 
-    # 3️⃣ only species_id
+    # 
     if species_id and not postcode:
         filtered = [item for item in cached_species_locations if item.get('species_id') == species_id]
         result_data = [
@@ -201,7 +200,7 @@ def get_filtered_species_locations():
             if item.get("lat") is not None and item.get("long") is not None
         ]
 
-    # only input postcode
+ 
     elif postcode and not species_id:
         suburb_res = supabase.table("suburb_locations").select("lat, long").eq("postcode", postcode).limit(1).execute()
         if suburb_res.data:
@@ -216,10 +215,10 @@ def get_filtered_species_locations():
                 }
                 for item in cached_species_locations
                 if item.get("lat") is not None and item.get("long") is not None and
-                   geodesic(origin, (item['lat'], item['long'])).km <= 100
+                   geodesic(origin, (item['lat'], item['long'])).km <= 20
             ]
 
-    # species_id + postcode
+    
     elif postcode and species_id:
         suburb_res = supabase.table("suburb_locations").select("lat, long").eq("postcode", postcode).limit(1).execute()
         if suburb_res.data:
@@ -246,13 +245,11 @@ def get_filtered_species_locations():
         "result": result_data
     })
 
-
-
 def initialize_server_data():
     load_species_data()
     load_species_summary()
 
+initialize_server_data()
+
 if __name__ == '__main__':
-    initialize_server_data()
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=5000)
