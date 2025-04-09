@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 import { Drawer } from 'antd'
 import {
     CloseOutlined,
@@ -9,6 +10,8 @@ import styles from './Headers.module.css'
 
 
 const Headers = () => {
+    const navigate = useNavigate();
+
     const [open, setOpen] = useState(false)
     const [classNames] = useState({
         body: 'drawer-body',
@@ -22,11 +25,15 @@ const Headers = () => {
         setOpen(false);
     };
 
+    const handleJumpHome = async () => {
+        navigate('/')
+    }
+
 
     return (
         <>
             <header className={`items-center ${styles.headers}`}>
-                <div className={styles.logo_wrap}>
+                <div className={styles.logo_wrap} onClick={handleJumpHome}>
                     <img className='mlr-auto' alt='logo' src='https://s3-alpha-sig.figma.com/img/873f/cfe7/629f0c8bf206f97a5368ef63f714774e?Expires=1744588800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=DJdRwuZOEY2DOCNt8bq1bEz8pGztgnGPLXammBT6Czk2v~g4SnIMrpCSdbmfAjEsz8OaHJieQa2XW~EtJwQt35hyrzzYBjX86dJtgNUoMz1tSJTalFgXLaTTpdyxf-AaXzxc86swMmL~BG4VKM9J7Scu2ENYn5WqI1k8fgNkhLo6wZbFjOPJZKOjqNTCqtccBaL6KsX2q~SORziY4d8fSZAggGwz5cReVOaLrqHDdRZ71n263VcSN9ds~JLPvvRpZiYBd8lHEyLlsFz9v7LxfyuF4E~E~x6n34kuR4c0gibbhLgbPvrO-QtstJ1jDJx5yUWok4r01WNKOkhByE-czg__'></img>
                     WildLinky
                 </div>
