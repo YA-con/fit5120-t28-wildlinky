@@ -219,7 +219,7 @@ def get_filtered_species_locations():
                    geodesic(origin, (item['lat'], item['long'])).km <= 20
             ]
 
-    # 5️⃣ species_id + postcode
+    # species_id + postcode
     elif postcode and species_id:
         suburb_res = supabase.table("suburb_locations").select("lat, long").eq("postcode", postcode).limit(1).execute()
         if suburb_res.data:
