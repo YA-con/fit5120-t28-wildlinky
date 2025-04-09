@@ -130,16 +130,16 @@ const ExploreSpecies = () => {
                             options={[
                                 {
                                     value: 1,
-                                    label: 'option one'
+                                    label: 'Helmeted Honeyeater'
                                 }, {
                                     value: 2,
-                                    label: 'option 2'
+                                    label: 'Leadbeater’s Possum'
                                 }, {
                                     value: 3,
-                                    label: 'option 3'
+                                    label: 'Southern Greater Glider'
                                 }, {
                                     value: 4,
-                                    label: 'option 4'
+                                    label: 'Brush-tailed Rock-wallaby'
                                 }
                             ]}
                         ></Select>
