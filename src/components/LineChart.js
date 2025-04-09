@@ -1,43 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const LineChart = () => {
-  const option = {
+const LineChart = ({ values }) => {
+  const [option, setOption] = useState({
     title: {
-        text: '',
-        left: 0
+      text: '',
+      left: 0
     },
     tooltip: {
-        trigger: 'axis'
+      trigger: 'axis'
     },
-    legend: {
-        
-    },
+    legend: {},
     grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        top: '10%',
-        containLabel: true
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      top: '10%',
+      containLabel: true
     },
     xAxis: {
       type: 'category',
-      data: ['1600', '1650', '1700', '1750', '1800', '1850', '1900', '1950', '2000', '2025']
+      data: []
     },
     yAxis: {
       type: 'value'
     },
     series: [
-        {
-            name: 'Population',
-            type: 'line',
-            stack: 'Number',
-            data: [30000, 27342, 25000, 24000, 15000, 10000, 5000, 4000, 12000, 20000]
-        }
+      {
+        name: 'Population',
+        type: 'line',
+        stack: 'Number',
+        data: []
+      }
     ]
-  };
+  });
+
+  useEffect(() => {
+    if (!values?.length) return;
+    
+    const xAxis = values.map(item => item.year);
+    const seriesData = values.map(item => item.total);
+
+    setOption(prev => ({
+      ...prev,
+      xAxis: {
+        ...prev.xAxis,
+        data: xAxis
+      },
+      series: [
+        {
+          ...prev.series[0],
+          data: seriesData
+        }
+      ]
+    }));
+  }, [values]);
 
   return <ReactECharts option={option} style={{ height: "100%" }} />;
 };
 
-export default LineChart
+export default LineChart;

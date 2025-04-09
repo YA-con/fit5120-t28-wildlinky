@@ -19,7 +19,6 @@ const Headers = () => {
         setOpen(true);
     };
     const onClose = () => {
-        console.log('--------')
         setOpen(false);
     };
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styles from './ExploreSpecies.module.css'
 import { Select, Input } from 'antd'
 import {
@@ -12,39 +12,64 @@ import jsPDF from 'jspdf'
 
 const ExploreSpecies = () => {
     const pdfRef = useRef()
-    const [query, setQuery] = useState({
+    const query = useRef({
         postcode: '',
         species_id: 1
     })
+    const region = useRef({ species_id: 1 })
+    
     const [info, setInfo] = useState({})
-    const [speciesAddress, setSpeciesAddress] = useState([])
+    const [points, setPoints] = useState([])
+    const [charts, setCharts] = useState([])
+    const [, forceUpdate] = useState()
+
+    useEffect(() => {
+        handleGetSpeciesInfo()
+    }, [])
 
     // choose species
-    const handleChooseSpecies = async (species_id) => {
-        console.log(species_id,' species_id')
-        setQuery({
-            ...query,
-            species_id
-        })
+    const handleChooseSpecies = (species_id) => {
+        query.current.species_id = species_id
 
         handleGetSpeciesInfo()
     }
 
+    const handleChangeValue = (e) => {
+        query.current.postcode = e.target.value
+        forceUpdate({})
+    }
+
     // get species info
     const handleGetSpeciesInfo = async () => {
-        console.log('query', query)
-
-        let str = `?postcode=${ query.postcode }&species_id=${ query.species_id }`
+        let str = `?postcode=${ query.current.postcode }&species_id=${ query.current.species_id }`
 
         try {
             const resp = await (await fetch('https://fit5120-t28-wildlinky.onrender.com/api/species-filtered-locations' + str)).json()
             
             setInfo(resp.species_info)
-            setSpeciesAddress(resp.result)
+            setPoints(resp.result)
         } catch (e) {
             console.log('error', e)
         }
 
+    }
+
+    // choose region
+    const handleChooseRegion = async (species_id) => {
+        region.current.species_id = species_id
+        handleGetChartData()
+    }
+
+    // get chart data
+    const handleGetChartData = async () => {
+
+        try {
+            const resp = await (await fetch('https://fit5120-t28-wildlinky.onrender.com/api/species-locations/timeseries?species_id=' + region.current.species_id)).json()
+            
+            setCharts(resp)
+        } catch (e) {
+            console.log('error', e)
+        }
     }
 
     const handleExportChart = () => {
@@ -120,13 +145,15 @@ const ExploreSpecies = () => {
                     <section className='items-center'>
                         <Input
                             className={styles.formWrap}
-                            suffix={<SearchOutlined />}
+                            suffix={<SearchOutlined onClick={handleGetSpeciesInfo} />}
                             placeholder='Input POSTCODE in VIC'
+                            value={query.current.postcode}
+                            onChange={handleChangeValue}
                         ></Input>
                         <Select
                             className={styles.formWrap}
                             placeholder="SELECT SPECIES"
-                            value={query.species_id}
+                            value={query.current.species_id}
                             onChange={handleChooseSpecies}
                             options={[
                                 {
@@ -146,31 +173,58 @@ const ExploreSpecies = () => {
                         ></Select>
                     </section>
                     <section className={styles.card}>
-                        <img alt='img' src={ info.image_url } />
-                        <div className={styles.cartTitle}>{info.name}</div>
-                        <div className='f20'>Status: {info.epbcstatus}</div>
-                        <div className='f20'>State: {info.state}</div>
-                        <div className='f20'>Habitat: {info.eco_type}</div>
-                        <div className='f20'>Main Threats:</div>
-                        <ul>
-                            <li>{info.threats}</li>
-                            <li>{info.description }</li>
-                        </ul>
+                        {
+                            info.name && (
+                                <>
+                                    <img alt='img' src={ info.image_url } />
+                                    <div className={styles.cartTitle}>{info.name}</div>
+                                    <div className='f20'>Status: {info.epbcstatus}</div>
+                                    <div className='f20'>State: {info.state}</div>
+                                    <div className='f20'>Habitat: {info.eco_type}</div>
+                                    <div className='f20'>Main Threats:</div>
+                                    <ul>
+                                        <li>{info.threats}</li>
+                                        <li>{info.description }</li>
+                                    </ul>
+                                </>
+                            )
+                        }
                     </section>
                     <section className={styles.cardBtn}>Read More</section>
                 </section>
                 <section className={styles.mapbox}>
-                    <MapBox />
+                    <MapBox points={ points } />
                 </section>
             </section>
 
             <section className={styles.pointerWrap}>
                 <div className='f40 f_weight'>Track Population Trends Over Time</div>
-                <div className='justify-end mb-64'>
-                    <div className={styles.regionBtn}>By Region</div>
+                <div className='justify-end mb-32'>
+                    {/* <div className={styles.regionBtn}>By Region</div> */}
+                    <Select
+                            className={styles.formWrap}
+                            placeholder="SELECT SPECIES"
+                            value={region.current.species_id}
+                            onChange={handleChooseRegion}
+                            options={[
+                                {
+                                    value: 1,
+                                    label: 'Helmeted Honeyeater'
+                                }, {
+                                    value: 2,
+                                    label: 'Leadbeater’s Possum'
+                                }, {
+                                    value: 3,
+                                    label: 'Southern Greater Glider'
+                                }, {
+                                    value: 4,
+                                    label: 'Brush-tailed Rock-wallaby'
+                                }
+                            ]}
+                        ></Select>
                 </div>
                 <div className={styles.charts} ref={pdfRef}>
-                    <LineChart />
+                    <LineChart values={charts} />
                 </div>
                 <div className='justify-end mt-64'>
                     <div className={styles.exportBtn} onClick={handleExportChart}>Export</div>
