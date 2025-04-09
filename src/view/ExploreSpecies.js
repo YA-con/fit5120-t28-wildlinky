@@ -25,6 +25,7 @@ const ExploreSpecies = () => {
 
     useEffect(() => {
         handleGetSpeciesInfo()
+        handleGetChartData()
     }, [])
 
     // choose species
