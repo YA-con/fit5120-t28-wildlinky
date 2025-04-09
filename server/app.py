@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from supabase import create_client
 import math
+import os
 
 app = Flask(__name__)
 CORS(app)
