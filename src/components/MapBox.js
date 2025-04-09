@@ -11,7 +11,7 @@ const MapBox = () => {
       container: 'map-container',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [145.135, -37.91], 
-      zoom: 8,                    
+      zoom: 10,                    
     });
 
     return () => map.remove();

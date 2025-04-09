@@ -13,14 +13,15 @@ import jsPDF from 'jspdf'
 const ExploreSpecies = () => {
     const pdfRef = useRef()
     const [query, setQuery] = useState({
-        year: '',
         postcode: '',
         species_id: 1
     })
     const [info, setInfo] = useState({})
+    const [speciesAddress, setSpeciesAddress] = useState([])
 
     // choose species
     const handleChooseSpecies = async (species_id) => {
+        console.log(species_id,' species_id')
         setQuery({
             ...query,
             species_id
@@ -31,17 +32,17 @@ const ExploreSpecies = () => {
 
     // get species info
     const handleGetSpeciesInfo = async () => {
-        let params = new URLSearchParams()
-        
-        params.append('year', query.year)
-        params.append('postcode', query.postcode)
-        params.append('species_id', query.species_id)
+        console.log('query', query)
+
+        let str = `?postcode=${ query.postcode }&species_id=${ query.species_id }`
 
         try {
-            const resp = await fetch('https://fit5120-t28-wildlinky.onrender.com:5000/api/species-locations?' + params.toString())
-            setInfo(resp.data)
+            const resp = await (await fetch('https://fit5120-t28-wildlinky.onrender.com/api/species-filtered-locations' + str)).json()
+            
+            setInfo(resp.species_info)
+            setSpeciesAddress(resp.result)
         } catch (e) {
-
+            console.log('error', e)
         }
 
     }

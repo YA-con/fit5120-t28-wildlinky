@@ -131,8 +131,7 @@
     cursor: pointer;
 }
 .mapbox {
-    flex: 1;
-    min-width: 1px;
+    width: 60%;
     height: 682px;
     margin-left: 20px;
 }
