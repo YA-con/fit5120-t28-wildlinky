@@ -7,7 +7,8 @@ import ExploreSpecies from '../view/ExploreSpecies'
 import Stories from '../view/Stories'
 import TakeAction from '../view/TakeAction'
 import Wireframe from '../view/Wireframe'
-
+import ReadMoreForest from '../view/ReadMoreForest';
+import ReadMoreBiodiversity from '../view/ReadMoreBiodiversity';
 
 const Layout = () => {
     return (
@@ -16,6 +17,8 @@ const Layout = () => {
 
             <Routes>
                 <Route index element={<Home />} />
+                <Route path="home/forest" element={<ReadMoreForest />} />
+                <Route path="home/biodiversity" element={<ReadMoreBiodiversity />} />
                 <Route path="email" element={<Email />} />
                 <Route path="explore-species" element={<ExploreSpecies />} />
                 <Route path="stories" element={<Stories />} />
