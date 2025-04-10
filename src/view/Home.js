@@ -7,9 +7,6 @@ import nearbyImg from '../assets/local-species.jpg';
 import actImg from '../assets/take-action.jpg';
 import writeImg from '../assets/success-story.jpg';
 import viewImg from '../assets/email-template.jpg';
-import partner1 from '../assets/partner-atlas.png';
-import partner2 from '../assets/partner-wires.png';
-import partner3 from '../assets/partner-bush.png';
 import forestLossChart from '../assets/forest-loss-chart.png';
 import threatenedSpeciesChart from '../assets/threatened_species_chart.png';
 import { useNavigate } from 'react-router-dom';
@@ -126,26 +123,6 @@ const Home = () => {
                     </div>
                 </div>
             ))}
-            </section>
-
-            <section className={styles.partnersSection}>
-                <h2 className={styles.partnerTitle}>Our Partners</h2>
-                <div className={styles.partnerGrid}>
-                    {[
-                    { name: 'Atlas of Living Australia', img: partner1 },
-                    { name: 'WIRES', img: partner2 },
-                    { name: 'Bush Heritage Australia', img: partner3 }
-                    ].map((partner, i) => (
-                    <div key={i} className={styles.partnerCard}>
-                        <img src={partner.img} alt={partner.name} />
-                        <span>{partner.name}</span>
-                    </div>
-                    ))}
-                </div>
-
-                <div className={styles.partnerBtnWrapper}>
-                    <div className={styles.otherBtn}>Become a Partner</div>
-                </div>
             </section>
 
             <section className={styles.footer}>
