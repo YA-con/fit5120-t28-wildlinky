@@ -215,7 +215,7 @@ def get_filtered_species_locations():
                 }
                 for item in cached_species_locations
                 if item.get("lat") is not None and item.get("long") is not None and
-                   geodesic(origin, (item['lat'], item['long'])).km <= 20
+                   geodesic(origin, (item['lat'], item['long'])).km <= 200
             ]
 
     
