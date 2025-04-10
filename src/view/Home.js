@@ -57,7 +57,7 @@ const Home = () => {
             </section>
 
             <section className={styles.chartSection}>
-                <h2 className={styles.chartTitle}>Forest Loss in Victoria (2001–2023)</h2>
+                <h2 className={styles.chartTitle}>Tree Loss in Victoria (2001–2023)</h2>
                 <img src={forestLossChart} alt="Forest Loss Chart" className={styles.chartImage} />
                 <p className={styles.caption}>(Source: Global Forest Watch)</p>
                 <div className={styles.narrowCard}>

@@ -30,8 +30,8 @@ const ReadMoreForest = () => {
                 <p>
                     Over the past two decades, we’ve witnessed a significant unraveling.
                     Forest cover in Victoria has declined dramatically—about <strong>25%</strong> has vanished
-                    between 2001 and 2020. That’s a loss of over <strong>15 million hectares</strong>,
-                    shrinking from 63.9 million to 48.1 million hectares in just 20 years.
+                    between 2001 and 2020. That’s a loss of over <strong>1.5 million hectares</strong>,
+                    shrinking from 6.39 million to 4.81 million hectares in just 20 years.
                 </p>
             </section>
 

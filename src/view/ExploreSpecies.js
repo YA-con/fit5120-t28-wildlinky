@@ -54,33 +54,6 @@ const ExploreSpecies = () => {
         </div>
       </section>
 
-      
-      <section className={styles.findBox}>
-        <section className={styles.title}>Find Endangered Wildlife Near You</section>
-        <section className="items-center">
-          <Input
-            className={styles.formWrap}
-            placeholder="Input POSTCODE in VIC"
-            value={query.postcode}
-            onChange={handlePostcodeChange}
-            suffix={<SearchOutlined />}
-          />
-          <Select
-            className={styles.formWrap}
-            placeholder="SELECT SPECIES"
-            value={query.species_id}
-            onChange={handleSpeciesChange}
-            options={[
-              { value: 1, label: 'Helmeted Honeyeater' },
-              { value: 2, label: 'Leadbeater’s Possum' },
-              { value: 3, label: 'Southern Greater Glider' },
-              { value: 4, label: 'Brush-tailed Rock-wallaby' },
-            ]}
-          />
-        </section>
-      </section>
-
-     
       <section className="f40 f_weight mt-64 mb-32">Discover Their Habitat Zones</section>
       <section className="flex">
         <section className="flex-wid mr-20">
@@ -130,7 +103,7 @@ const ExploreSpecies = () => {
           <section className={styles.cardBtn}>Read More</section>
         </section>
         <section className={styles.mapbox}
-  style={{ position: 'relative' }} 
+    style={{ position: 'relative' }} 
 >
   <MapBox points={points} />
   <div
