@@ -103,28 +103,26 @@ const ExploreSpecies = () => {
           <section className={styles.cardBtn}>Read More</section>
         </section>
         <section className={styles.mapbox}
-    style={{ position: 'relative' }} 
->
-  <MapBox points={points} />
-  <div
-    style={{
-      position: 'absolute',
-      top: '10px',      
-      right: '10px',     
-      zIndex: 1000,
-      backgroundColor: 'rgba(255,255,255,0.9)',
-      padding: '5px 10px',
-      borderRadius: '5px',
-      fontWeight: 'bold'
-    }}
-  >
-    Count: {points.length}
-  </div>
-</section>
+                style={{ position: 'relative' }} 
+            >
+            <MapBox points={points} />
+            <div
+                style={{
+                position: 'absolute',
+                top: '10px',      
+                right: '10px',     
+                zIndex: 1000,
+                backgroundColor: 'rgba(255,255,255,0.9)',
+                padding: '5px 10px',
+                borderRadius: '5px',
+                fontWeight: 'bold'
+                }}
+            >
+                Count: {points.length}
+            </div>
+        </section>
       </section>
-
-      
-      <section className={styles.pointerWrap}>
+      {/* <section className={styles.pointerWrap}>
         <div className="f40 f_weight">Track Population Trends Over Time</div>
         <div className="justify-end mb-32">
           <Select
@@ -148,7 +146,7 @@ const ExploreSpecies = () => {
             Export
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 };
