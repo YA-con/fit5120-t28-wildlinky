@@ -1,0 +1,70 @@
+.contailer {
+    padding: 0 64px 188px;
+}
+
+.banner {
+    height: 513px;
+    margin: 0 -64px;
+    background-image: url('https://s3-alpha-sig.figma.com/img/620d/5176/6cc542c237792ec2f67d2a50437049e3?Expires=1744588800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=hW3DcqpvFeiwGaRLVF9nBL9TFUhFboA-48kTmq3X-2Q2qj9Eo-eNqXZcijwnbjrbdg3fGLiE6aQd5U-oKpKTK7OypLxH~XaCyRa6izvI6m3AmFJ7cqEtMoYHBuXJJqPixOyYmSIK2-wkLOLm~DUuA~rL6VAx~LrVzfi4McB75dQ2zojZaogK0kUP~CyYKwXegHVFRUaKdJxVqHb7b11BXK3FIS64M4BnrmTJlG7dlz8t6MWEUihu8rU4M7ZqU4okItV0oozA3rLkVtT5ODDY0nq7IQ3AxmXkUHWI~cUZVnGylVqpoyAxa51Pzq2ZC0b9eagJSUb6~bAT8sPw1MTXyg__');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, .3);
+    z-index: 0;
+}
+.bannerTxtBox {
+    background: #F9CF39;
+    width: 600px;
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    left: 10%;
+    bottom: 30%;
+    padding: 16px;
+}
+.bannerTxt {
+    color: #fff;
+    font-size: 24px;
+    position: absolute;
+    left: 10%;
+    bottom: 15%;
+}
+
+.title {
+    padding: 124px 0 0;
+    color: #07431E;
+    font-size: 40px;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.card {
+    border: 2px solid #07431E;
+    border-radius: 8px;
+    padding: 32px 48px;
+    background-color: #fff;
+    margin: 48px 0 0;
+    font-size: 20px;
+    line-height: 1.6;
+}
+.card ul {
+    padding-left: 18px;
+    line-height: 1.6;
+}
+
+.clickBtn {
+    width: 328px;
+    padding: 4px 16px;
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 30px;
+    background: #F9CF39;
+    margin: 48px auto 0;
+}
