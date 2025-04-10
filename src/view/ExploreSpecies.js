@@ -9,24 +9,24 @@ import jsPDF from 'jspdf';
 import { useSpeciesData } from '../hook/useSpeciesData';
 
 const ExploreSpecies = () => {
-  // 用 useState 管理查询条件
+  
   const [query, setQuery] = useState({ postcode: '', species_id: 1 });
 
-  // 使用自定义 Hook，根据 query 获取数据
+  
   const { info, points, charts, loadingInfo, error } = useSpeciesData(query);
 
-  // 当用户输入邮编时更新 query
+  
   const handlePostcodeChange = useCallback((e) => {
     const postcode = e.target.value;
     setQuery((prev) => ({ ...prev, postcode }));
   }, []);
 
-  // 当用户选择物种时更新 query
+  
   const handleSpeciesChange = useCallback((species_id) => {
     setQuery((prev) => ({ ...prev, species_id }));
   }, []);
 
-  // 导出图表为 PDF
+  
   const handleExportChart = () => {
     const chartContainer = document.querySelector('#charts-container');
     html2canvas(chartContainer).then((canvas) => {
@@ -42,7 +42,7 @@ const ExploreSpecies = () => {
 
   return (
     <main className={styles.contailer}>
-      {/* 顶部横幅 */}
+      
       <section className={styles.banner}>
         <div className={styles.mask}></div>
         <div className={styles.bannerTxtBox}>
@@ -54,7 +54,7 @@ const ExploreSpecies = () => {
         </div>
       </section>
 
-      {/* 搜索区域 */}
+      
       <section className={styles.findBox}>
         <section className={styles.title}>Find Endangered Wildlife Near You</section>
         <section className="items-center">
@@ -80,7 +80,7 @@ const ExploreSpecies = () => {
         </section>
       </section>
 
-      {/* 信息展示及地图 */}
+     
       <section className="f40 f_weight mt-64 mb-32">Discover Their Habitat Zones</section>
       <section className="flex">
         <section className="flex-wid mr-20">
@@ -130,14 +130,14 @@ const ExploreSpecies = () => {
           <section className={styles.cardBtn}>Read More</section>
         </section>
         <section className={styles.mapbox}
-  style={{ position: 'relative' }} // 设置为相对定位，以便覆盖层绝对定位
+  style={{ position: 'relative' }} 
 >
   <MapBox points={points} />
   <div
     style={{
       position: 'absolute',
-      top: '10px',       // 根据需要调整位置（上边距）
-      right: '10px',     // 如需左上角，则用 left: '10px'
+      top: '10px',      
+      right: '10px',     
       zIndex: 1000,
       backgroundColor: 'rgba(255,255,255,0.9)',
       padding: '5px 10px',
@@ -150,7 +150,7 @@ const ExploreSpecies = () => {
 </section>
       </section>
 
-      {/* 图表与导出区域 */}
+      
       <section className={styles.pointerWrap}>
         <div className="f40 f_weight">Track Population Trends Over Time</div>
         <div className="justify-end mb-32">
