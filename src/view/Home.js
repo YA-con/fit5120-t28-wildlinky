@@ -1,143 +1,124 @@
-import React, {  } from 'react'
-import { Carousel } from 'antd';
-import styles from './Home.module.css'
-import banner1 from '../assets/banner1.png';
-import banner2 from '../assets/banner2.png';
-import nearbyImg from '../assets/local-species.jpg';
-import actImg from '../assets/take-action.jpg';
-import writeImg from '../assets/success-story.jpg';
-import viewImg from '../assets/email-template.jpg';
-import forestLossChart from '../assets/forest-loss-chart.png';
-import threatenedSpeciesChart from '../assets/threatened_species_chart.png';
+import React, { useEffect } from 'react';
+import styles from './Home.module.css';
+import banner from '../assets/banner1.png';
+import animal1 from '../assets/animal1.png';
+import animal2 from '../assets/animal2.png';
+import animal3 from '../assets/animal3.png';
+import animal4 from '../assets/animal4.png';
+import policyImg from '../assets/before-after.png';
+import emailIcon from '../assets/email-template.jpg';
 import { useNavigate } from 'react-router-dom';
-  
+
 const Home = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const scrollTo = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-    return (
-        <main>
-            <Carousel autoplay autoplaySpeed={10000} dotPosition="bottom" infinite>
-                <div className={styles.carousel}>
-                    <img className={styles.carouselImg} src={banner1} alt='carousel' />
-                    <div className={styles.blurOverlay}></div>
-                    <div className={styles.carouselContent}>
-                    <p className={styles.carouselTxt}>Victoria is losing its forests faster than ever</p>
-                    <button onClick={() => navigate('/home/forest')}>Read More</button>
-                    </div>
-                </div>
-                <div className={styles.carousel}>
-                    <img className={styles.carouselImg} src={banner2} alt='carousel' />
-                    <div className={styles.blurOverlay}></div>
-                    <div className={styles.carouselContent}>
-                    <p className={styles.carouselTxt}>Forest Types in Victoria & Their Connection to Biodiversity Policies</p>
-                    <button onClick={() => navigate('/home/biodiversity')}>Read More</button>
-                    </div>
-                </div>
-            </Carousel>
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible);
+        }
+      });
+    }, { threshold: 0.2 });
 
-            <section className={styles.quoteBox}>
-                <p className={styles.quoteText}>
-                    “Victoria has lost over 75% of its native vegetation due to agriculture, urban expansion, and logging. <br />
-                    Yet, these forests are home to many of Australia’s most vulnerable species. <br />
-                    Protecting what remains is not only vital for biodiversity—but for our future.” <br />
-                    —Victoria Environmental Conservation Council
-                </p>
-                <p className={styles.quoteText}>
-                    As forest cover continues to decline across Victoria, the impacts ripple across entire ecosystems — putting countless species at risk of extinction.
-                </p>
-                <p className={styles.quoteText}>
-                    "Victoria has already lost 18 mammal species, 2 bird species, 1 snake, 3 freshwater fish, 6 invertebrates, <br />
-                    and 51 plant species. Currently, approximately 2,000 species of plants, animals, and ecological communities in Victoria are considered to be threatened." <br />
-                    —Department of Environment, Victoria
-                </p>
-            </section>
+    const sections = document.querySelectorAll(`.${styles.section}`);
+    sections.forEach(section => observer.observe(section));
 
-            <section className={styles.chartSection}>
-                <h2 className={styles.chartTitle}>Tree Loss in Victoria (2001–2023)</h2>
-                <img src={forestLossChart} alt="Forest Loss Chart" className={styles.chartImage} />
-                <p className={styles.caption}>(Source: Global Forest Watch)</p>
-                <div className={styles.narrowCard}>
-                    <p className={styles.chartDesc}>
-                    Over the past two decades, Victoria has lost 1.63 million hectares of tree cover —
-                    a 25% decrease — leading to 505 million tonnes of CO₂ emissions.
-                    </p>
-                </div>
-            </section>
+    return () => observer.disconnect();
+  }, []);
 
-            <section className={styles.chartSection}>
-                <h2 className={styles.chartTitle}>Threatened Species in Victoria (2001–2024)</h2>
-                <img src={threatenedSpeciesChart} alt="Threatened Species in Victoria (2001–2024)" className={styles.chartImage} />
-                <p className={styles.caption}>(Source: Department of Energy, Environment and Climate Action, Victoria)</p>
-                <div className={styles.narrowCard}>
-                    <p className={styles.chartDesc}>
-                    Victoria has seen a significant increase in threatened species over the past two decades. 
-                    As of 2024, more than 140 new listings have been added to the threatened list in a single year, 
-                    including animals, plants, and ecological communities — highlighting the ongoing biodiversity crisis in the state.
-                    </p>
-                </div>
-            </section>
+  return (
+    <main>
+      <div className={styles.hero} style={{ backgroundImage: `url(${banner})` }}>
+        <div className={styles.heroOverlay}>
+          <h1>Forest loss is killing our wildlife – and we’re letting it happen</h1>
+          <p>
+            Learn about forest loss, meet the species at risk,
+            and discover how your voice can make a difference.
+          </p>
+          <div className={styles.downArrow} onClick={() => scrollTo('section1')}>⏷</div>
+        </div>
+      </div>
 
-            <section className={styles.insights}>Take Action for Nature</section>
-            
-            <section className={styles.quickGrid}>
-            {[
-                {
-                    img: nearbyImg,
-                    title: 'Local Endangered Species',
-                    desc: 'Enter your location to find threatened species nearby.',
-                    btn: 'Search Now',
-                    path: '/explore-species',
-                },
-                {
-                    img: actImg,
-                    title: 'Take Action',
-                    desc: 'Get involved with practical steps and local opportunities.',
-                    btn: 'Act Now',
-                    path: '/take-action',
-                },
-                {
-                    img: writeImg,
-                    title: 'Read the Stories',
-                    desc: 'Read success stories and meet Victoria’s forest heroes.',
-                    btn: 'Read Now',
-                    path: '/stories',
-                },
-                {
-                    img: viewImg,
-                    title: 'Write the Email Template',
-                    desc: 'Use our ready-made email to raise your voice for Victoria’s endangered species.',
-                    btn: 'Write Now',
-                    path: '/email',
-                },
-            ].map((item, i) => (
-                <div className={styles.quickCard} key={i}>
-                    <img src={item.img} alt={item.title} className={styles.quickImg} />
-                <div className={styles.quickTitle}>{item.title}</div>
-                <div className={styles.quickDesc}>{item.desc}</div>
-                    <div
-                        className={styles.quickBtn}
-                        onClick={() => navigate(item.path)}
-                    >
-                        {item.btn}
-                    </div>
-                </div>
-            ))}
-            </section>
+      <section className={`${styles.section} ${styles.greenSection}`} id="section1">
+        <div className={styles.sectionContent}>
+          <div className={styles.sectionText}>
+            <h2>What’s Happening to Our Forests?</h2>
+            <p><strong>14%</strong> of Victoria’s native forest cover has been lost since 2000</p>
+            <p>Over <strong>500 species</strong> in Victoria are listed as threatened or endangered.</p>
+            <p><strong>2%</strong> of land holds over <strong>75%</strong> of biodiversity in some regions.</p>
+            <button onClick={() => navigate('/explore-species')}>Discover more</button>
+          </div>
+          <div className={styles.sectionImagesGrid}>
+            <img src={animal1} alt="Species 1" />
+            <img src={animal2} alt="Species 2" />
+            <img src={animal3} alt="Species 3" />
+            <img src={animal4} alt="Species 4" />
+          </div>
+        </div>
+        <div className={styles.downArrow} onClick={() => scrollTo('section2')}>⏷</div>
+      </section>
 
-            <section className={styles.footer}>
-            <div className="items-center">
-                <span>About</span>
-                <span>Contact</span>
-                <span>Privacy</span>
-                <span>FAQ</span>
-            </div>
-            <div>
-                © 2025 Protecting Life on Land | Based in Australia | Designed for SDG 15 Impact
-            </div>
-            </section>
-        </main>
-    )
-}
+      <section className={`${styles.section} ${styles.whiteBackground}`} id="section2">
+        <div className={styles.sectionContent}>
+          <img src={policyImg} alt="Policy visual" className={styles.sectionImgLeft} />
+          <div className={styles.sectionText}>
+            <h2>Policies protect nature</h2>
+            <p>
+              <strong>The Flora and Fauna Guarantee Act 1988</strong> has helped protect over <strong>700 threatened species</strong>, and led to successful recovery programs. One of its major wins?
+              The <em>Eastern Barred Bandicoot</em>, once considered extinct in the wild, has now been reintroduced thanks to coordinated government action and strong legal protection. <em>Bandicoot story – ABC News.</em>
+            </p>
+            <button onClick={() => navigate('/take-action')}>Explore policies</button>
+          </div>
+        </div>
+        <div className={styles.downArrow} onClick={() => scrollTo('section3')}>⏷</div>
+      </section>
 
-export default Home
+      <section className={`${styles.section} ${styles.greenSection}`} id="section3">
+        <div className={styles.sectionContent}>
+          <div className={styles.sectionText}>
+            <h2>Speak Up with Confidence</h2>
+            <p>
+              Use our ready-to-go email tool to raise your voice.
+              Pick a topic, add your message, and send it to someone who can make a difference.
+            </p>
+            <button onClick={() => navigate('/email')}>Write email</button>
+          </div>
+          <img src={emailIcon} alt="Email icon" className={styles.sectionImgRight} />
+        </div>
+      </section>
+      <footer style={{
+        backgroundColor: '#1d4022',
+        color: 'white',
+        padding: '40px 40px',
+        textAlign: 'center',
+        fontSize: '14px'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '24px',
+          marginBottom: '40px',
+          fontWeight: 'bold'
+        }}>
+          <a href="#" style={{ color: 'white', textDecoration: 'none' }}>About</a>
+          <a href="#" style={{ color: 'white', textDecoration: 'none' }}>Contact</a>
+          <a href="#" style={{ color: 'white', textDecoration: 'none' }}>Privacy</a>
+          <a href="#" style={{ color: 'white', textDecoration: 'none' }}>FAQ</a>
+        </div>
+        <div>
+          © 2025 Protecting Life on Land | Based in Australia | Designed for SDG 15 Impact
+        </div>
+      </footer>
+    </main>
+  );
+};
+
+export default Home;

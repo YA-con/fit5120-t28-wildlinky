@@ -4,7 +4,6 @@ import Headers from '../components/Headers'
 import Home from '../view/Home'
 import Email from '../view/Email'
 import ExploreSpecies from '../view/ExploreSpecies'
-import Stories from '../view/Stories'
 import TakeAction from '../view/TakeAction'
 import Wireframe from '../view/Wireframe'
 import ReadMoreForest from '../view/ReadMoreForest';
@@ -21,7 +20,6 @@ const Layout = () => {
                 <Route path="home/biodiversity" element={<ReadMoreBiodiversity />} />
                 <Route path="email" element={<Email />} />
                 <Route path="explore-species" element={<ExploreSpecies />} />
-                <Route path="stories" element={<Stories />} />
                 <Route path="take-action" element={<TakeAction />} />
                 <Route path="wireframe" element={<Wireframe />} />
             </Routes>
