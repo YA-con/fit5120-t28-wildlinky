@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Email.module.css';
 
-const speciesOptions = [
-    'Leadbeater’s Possum',
-    'Greater Glider',
-    'Regent Honeyeater',
-    'Orange-bellied Parrot',
-    'Eastern Curlew',
-    'Growling Grass Frog',
-    'Spotted Tree Frog',
-    'Plains-wanderer',
-    'Swift Parrot',
-    'Mountain Pygmy-possum'
-];
-
 const issueOptions = [
     'Logging',
     'Bushfires',
@@ -30,18 +17,15 @@ const emailTemplates = {
 };
 
 const Email = () => {
-    const [selectedSpecies, setSelectedSpecies] = useState('');
     const [selectedIssue, setSelectedIssue] = useState('');
     const [message, setMessage] = useState('');
     const [copied, setCopied] = useState(false);
 
-    const allowEdit = selectedSpecies || selectedIssue;
+    const allowEdit = selectedIssue !== '';
 
-    const handleSelect = (type, value) => {
-      if (type === 'species') setSelectedSpecies(value);
-      if (type === 'issue') setSelectedIssue(value);
-
-      const template = emailTemplates[value] || '';
+    const handleSelect = (value) => {
+        setSelectedIssue(value);
+        const template = emailTemplates[value] || '';
         setMessage(template);
         setCopied(false);
     };
@@ -58,7 +42,6 @@ const Email = () => {
 
     const handleClear = () => {
         if (window.confirm('Are you sure to delete template content?')) {
-            setSelectedSpecies('');
             setSelectedIssue('');
             setMessage('');
             setCopied(false);
@@ -67,46 +50,35 @@ const Email = () => {
 
     return (
         <main className={styles.contailer}>
-            <section className={styles.banner}>
-                <div className={styles.mask}></div>
-                <div className={styles.bannerTxtBox}>
-                    Speak Up for Wildlife.
+            <div className={styles.banner}>
+                <div className={styles.bannerOverlay}>
+                    <h1>
+                    Turn Your Frustration Into Action.
+                    </h1>
+                    <p>
+                    Find the right words to speak for the forests — backed by facts, policies, and a clear message.
+                    </p>
                 </div>
-                <div className={styles.bannerTxt}>
-                    Write a message to protect Victoria’s threatened species and forests. Every voice counts.
-                </div>
-            </section>
+            </div>
 
             <div className={styles.container}>
-
                 <h1 className={styles.headerTitle}>Draft Your Advocacy Email</h1>
                 <section className={styles.flexLayout}>
                     <div className={styles.left}>
-                        <h2 className={styles.subTitle}>Select a Species or Issue:</h2>
-                        <select
-                            className={styles.selectBox}
-                            value={selectedSpecies}
-                            onChange={(e) => handleSelect('species', e.target.value)}
-                        >
-                            <option value="">Select a species</option>
-                            {speciesOptions.map(opt => (
-                            <option key={opt} value={opt}>{opt}</option>
-                            ))}
-                        </select>
-
+                        <h2 className={styles.subTitle}>Select an Issue:</h2>
                         <select
                             className={styles.selectBox}
                             value={selectedIssue}
-                            onChange={(e) => handleSelect('issue', e.target.value)}
+                            onChange={(e) => handleSelect(e.target.value)}
                         >
                             <option value="">Select an issue</option>
                             {issueOptions.map(opt => (
-                            <option key={opt} value={opt}>{opt}</option>
+                                <option key={opt} value={opt}>{opt}</option>
                             ))}
                         </select>
 
                         {!allowEdit && (
-                            <p className={styles.note}>Please choose a topic to begin drafting your message.</p>
+                            <p className={styles.note}>Please choose an issue to begin drafting your message.</p>
                         )}
                         <textarea
                             className={styles.textarea}
@@ -131,5 +103,4 @@ const Email = () => {
         </main>
     );
 };
-
 export default Email;

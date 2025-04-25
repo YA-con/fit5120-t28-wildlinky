@@ -1,70 +1,153 @@
-.contailer {
-    padding: 0 64px 188px;
+.wrapper {
+  background-color: #fdfdfd;
+  color: #122;
+  font-family: system-ui, Arial, sans-serif;
+  padding-bottom: 80px;
+  width: 100%;
 }
 
 .banner {
-    height: 513px;
-    margin: 0 -64px;
-    background-image: url('https://s3-alpha-sig.figma.com/img/620d/5176/6cc542c237792ec2f67d2a50437049e3?Expires=1744588800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=hW3DcqpvFeiwGaRLVF9nBL9TFUhFboA-48kTmq3X-2Q2qj9Eo-eNqXZcijwnbjrbdg3fGLiE6aQd5U-oKpKTK7OypLxH~XaCyRa6izvI6m3AmFJ7cqEtMoYHBuXJJqPixOyYmSIK2-wkLOLm~DUuA~rL6VAx~LrVzfi4McB75dQ2zojZaogK0kUP~CyYKwXegHVFRUaKdJxVqHb7b11BXK3FIS64M4BnrmTJlG7dlz8t6MWEUihu8rU4M7ZqU4okItV0oozA3rLkVtT5ODDY0nq7IQ3AxmXkUHWI~cUZVnGylVqpoyAxa51Pzq2ZC0b9eagJSUb6~bAT8sPw1MTXyg__');
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0, .3);
-    z-index: 0;
-}
-.bannerTxtBox {
-    background: #F9CF39;
-    width: 600px;
-    font-size: 40px;
-    color: #fff;
-    position: absolute;
-    left: 10%;
-    bottom: 30%;
-    padding: 16px;
-}
-.bannerTxt {
-    color: #fff;
-    font-size: 24px;
-    position: absolute;
-    left: 10%;
-    bottom: 15%;
+  background-image: url('../assets/take-action.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  margin-bottom: 0;
+  padding: 0;
 }
 
-.title {
-    padding: 124px 0 0;
-    color: #07431E;
-    font-size: 40px;
-    text-decoration: underline;
-    text-align: center;
+.bannerOverlay {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 40px 60px;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.bannerOverlay h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  letter-spacing: 1px;
+}
+
+.bannerOverlay p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 960px;
+  margin: 0;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin: 60px 0 24px;
+  color: #12391e;
+  text-underline-offset: 6px;
+  letter-spacing: 1px;
 }
 
 .card {
-    border: 2px solid #07431E;
-    border-radius: 8px;
-    padding: 32px 48px;
-    background-color: #fff;
-    margin: 48px 0 0;
-    font-size: 20px;
-    line-height: 1.6;
-}
-.card ul {
-    padding-left: 18px;
-    line-height: 1.6;
+  border: 1px solid #1b4024;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 0 auto 40px;
+  max-width: 800px;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: white;
 }
 
-.clickBtn {
-    width: 328px;
-    padding: 4px 16px;
-    text-align: center;
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    border-radius: 30px;
-    background: #F9CF39;
-    margin: 48px auto 0;
+.card ul {
+  padding-left: 20px;
+}
+
+.card ul li {
+  margin-bottom: 8px;
+}
+
+.accordionWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordionItem {
+  background-color: #e5f0e7;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  color: #12391e;
+  transition: background-color 0.3s ease;
+}
+
+.accordionItem:hover {
+  background-color: #d7e7dc;
+}
+
+.accordionIcon {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.accordionContent {
+  background-color: #f2f8f4;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #222;
+  border-left: 4px solid #12391e;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.actionButton {
+  background-color: #2e533b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actionButton:hover {
+  background-color: #1d3d2b;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 100vh;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .bannerOverlay h1 {
+    font-size: 24px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
