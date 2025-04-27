@@ -2,6 +2,12 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from supabase import create_client
 import math
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+import os
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -244,7 +250,69 @@ def get_filtered_species_locations():
         "species_info": species_info,
         "result": result_data
     })
+@app.route('/api/generate-email', methods=['POST'])
+def generate_email():
+    GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
+    data = request.json
+    issue = data.get('issue', '')
+
+    print("========== DEBUGGING ==========")
+    print("Received issue from frontend:", issue)
+    print("Loaded GEMINI_API_KEY:", GEMINI_API_KEY)
+
+    if not GEMINI_API_KEY:
+        print("🚨 No API Key loaded from .env!")
+
+    if not issue:
+        print("🚨 No issue provided!")
+
+    headers = {
+        "Content-Type": "application/json"  # 
+    }
+
+    prompt = (
+        "Write a passionate and persuasive conservation advocacy email focused on the "
+        f"issue of '{issue}' in Victoria, Australia. The tone should be engaging and "
+        "professional, motivating councils to act. Dont include note at the end of the "
+        "email. The email should be 200 words long. The email should be addressed to the "
+        "council and include a subject line. The email should be written in Australian "
+        "English. The email should be written in a way that is easy to understand for a "
+        "general audience. The email should not include any technical jargon or complex "
+        "language. The email should be written in a way that is respectful and polite, "
+        "but also firm and assertive. The email should not include any personal opinions "
+        "or biases. The email should be based on facts and evidence."
+    )
+
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
+
+    try:
+        response = requests.post(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",  # 
+            headers=headers,
+            params={"key": GEMINI_API_KEY},
+            json=payload
+        )
+
+
+        print("Gemini Raw Response:", response.text)
+
+        if response.status_code == 200:
+            result = response.json()
+            generated_text = result['candidates'][0]['content']['parts'][0]['text']
+            return jsonify({"email": generated_text})
+        else:
+            print("🚨 Error from Gemini API:", response.text)
+            return jsonify({"error": "Gemini API Error", "details": response.text}), response.status_code
+
+    except Exception as e:
+        print("🚨 Exception:", str(e))
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+   
 def initialize_server_data():
     load_species_data()
     load_species_summary()
@@ -252,4 +320,6 @@ def initialize_server_data():
 initialize_server_data()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    from dotenv import load_dotenv
+    load_dotenv()
+    app.run(host='0.0.0.0', port=5001, debug=True)

@@ -9,25 +9,52 @@ const issueOptions = [
     'Agricultural Expansion'
 ];
 
-const emailTemplates = {
-    "Leadbeater’s Possum": `As a concerned citizen, I urge stronger protection for the Leadbeater’s Possum...`,
-    "Greater Glider": `The Greater Glider is under threat due to habitat fragmentation and logging...`,
-    "Logging": `Logging of native forests continues to degrade Victoria’s biodiversity...`,
-    "Bushfires": `With increasingly intense bushfires, we must strengthen forest resilience...`,
-};
-
 const Email = () => {
     const [selectedIssue, setSelectedIssue] = useState('');
     const [message, setMessage] = useState('');
     const [copied, setCopied] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const allowEdit = selectedIssue !== '';
 
-    const handleSelect = (value) => {
+    const generateEmail = async (issue) => {
+        setLoading(true);
+    
+        try {
+            const response = await fetch('http://localhost:5001/api/generate-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ issue })
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                setMessage(data.email);
+            } else {
+                console.error("[Backend Error]", data); // 🔥 Print full backend error
+                setMessage(`⚠️ Backend error: ${data.error || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error("[Connection Error]", error); // 🔥 Print full connection error
+            setMessage("⚠️ Backend connection failed. Please check server.");
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+
+    const handleSelect = async (value) => {
         setSelectedIssue(value);
-        const template = emailTemplates[value] || '';
-        setMessage(template);
-        setCopied(false);
+        if (value) {
+            await generateEmail(value);
+            setCopied(false);
+        } else {
+            setMessage('');
+            setCopied(false);
+        }
     };
 
     const handleCopy = () => {
@@ -35,13 +62,12 @@ const Email = () => {
             alert('Please generate or write a message before copying.');
             return;
         }
-
         navigator.clipboard.writeText(message);
         setCopied(true);
     };
 
     const handleClear = () => {
-        if (window.confirm('Are you sure to delete template content?')) {
+        if (window.confirm('Are you sure you want to clear the message?')) {
             setSelectedIssue('');
             setMessage('');
             setCopied(false);
@@ -52,12 +78,8 @@ const Email = () => {
         <main className={styles.contailer}>
             <div className={styles.banner}>
                 <div className={styles.bannerOverlay}>
-                    <h1>
-                    Turn Your Frustration Into Action.
-                    </h1>
-                    <p>
-                    Find the right words to speak for the forests — backed by facts, policies, and a clear message.
-                    </p>
+                    <h1>Turn Your Frustration Into Action.</h1>
+                    <p>Find the right words to speak for the forests — backed by facts, policies, and a clear message.</p>
                 </div>
             </div>
 
@@ -82,9 +104,9 @@ const Email = () => {
                         )}
                         <textarea
                             className={styles.textarea}
-                            value={message}
+                            value={loading ? "✍️ Generating email, please wait..." : message}
                             onChange={(e) => setMessage(e.target.value)}
-                            disabled={!allowEdit}
+                            disabled={!allowEdit || loading}
                         />
                         <button className={styles.clearBtn} onClick={handleClear}>
                             Clear template
@@ -93,8 +115,14 @@ const Email = () => {
 
                     <div className={styles.right}>
                         <h2 className={styles.subTitle}>Live Preview</h2>
-                        <div className={styles.previewBox}>{message}</div>
-                        <button className={styles.copyBtn} onClick={handleCopy}>
+                        <div className={styles.previewBox}>
+                            {loading ? "✍️ Generating..." : message}
+                        </div>
+                        <button
+                            className={styles.copyBtn}
+                            onClick={handleCopy}
+                            disabled={!allowEdit || loading}
+                        >
                             {copied ? 'Copied!' : 'Copy to Clipboard'}
                         </button>
                     </div>
@@ -103,4 +131,5 @@ const Email = () => {
         </main>
     );
 };
+
 export default Email;
