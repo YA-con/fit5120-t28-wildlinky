@@ -104,13 +104,19 @@
 
 .previewBox {
   height: 380px;
+  max-height: 500px;
+  overflow-y: auto; /* Add scrollbar if content is long */
+  overflow-x: hidden; /* No horizontal scroll */
   border: 2px solid #07431E;
   border-radius: 8px;
   padding: 14px;
   font-size: 16px;
   background-color: #fff;
-  white-space: pre-wrap;
+  white-space: pre-wrap; /*  Keep line breaks */
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word; /* Even better browser support */
 }
+
 
 .copyBtn,
 .clearBtn {
