@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './TakeAction.module.css';
 import banner from '../assets/take-action.jpg';
+import Quiz from './Quiz';
 
 const TakeAction = () => {
   const [openIndex, setOpenIndex] = useState(5);
+  const [quizStarted, setQuizStarted] = useState(false);
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -121,15 +123,20 @@ const TakeAction = () => {
           ))}
         </div>
       </section>
-
       <section>
         <h2 className={styles.sectionTitle}>Test Your Knowledge</h2>
         <div className={styles.card}>
-          <p>Ready to check what you’ve learned about forest protection policies? Take a short quiz to reinforce your understanding and get helpful feedback.</p>
-          <div className={styles.buttonGroup}>
-            <button className={styles.actionButton}>Start Quiz</button>
-            <button className={styles.actionButton}>Raise your voice</button>
-          </div>
+          {quizStarted ? (
+            <Quiz onQuit={() => setQuizStarted(false)}/>
+          ) : (
+            <>
+              <p>Ready to check what you’ve learned about forest protection policies? Take a short quiz to reinforce your understanding and get helpful feedback.</p>
+              <div className={styles.buttonGroup}>
+                <button className={styles.actionButton} onClick={() => setQuizStarted(true)}>Start Quiz</button>
+                <button className={styles.actionButton}>Raise your voice</button>
+              </div>
+            </>
+          )}
         </div>
       </section>
     </div>
