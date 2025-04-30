@@ -1,122 +1,253 @@
-.contailer {
-    padding: 0 64px 188px;
-}
-
-.banner {
-    height: 513px;
-    margin: 0 -64px;
-    background-image: url('https://s3-alpha-sig.figma.com/img/e8a9/5dbd/f4877850b8409a81022d26fe3a5913a5?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Id4tLaBphwgD5w7EpyCkuMLsmLkqfw4NK7CAhfRap1ufAZged8CtTK3T271KHk0sz3ruDiLI6NzYZB0uKF3n24-H~I7oEai3JUM9zpOmOMJj5TMH91huDBanZK-ROJpcf8st5-ldP--~PX3UdGB1LSCBriP1ufsEsC~wCHYYVT7yX~~9ftpDhkSfD1-gUCEhk-ccbqUE8S9qaly5FJtKdt4NHNzRtST0cBxEpiNo0ZqmaXm5a5D8B-r-qs9KfkuYEhnnERUCGr-t4UHTNb~e4giPyl8M4lEcKbFeeDmnPChQqRNR5vBIWQBO6~B-vE4wnSoq2R~~MpB32-Trq5jxUw__');
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.mask {
-    position: absolute;
+.wrapper {
+    background-color: #ffffff;
+    color: #122;
+    font-family: system-ui, Arial, sans-serif;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0, .3);
-    z-index: 0;
+    padding: 0;
+ }
+  
+.banner {
+    background-image: url('../assets/banner2.png');
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
-.bannerTxtBox {
-    background: #F9CF39;
-    width: 900px;
-    font-size: 40px;
-    color: #fff;
-    position: absolute;
-    left: 10%;
-    bottom: 30%;
-    padding: 16px;
+  
+.bannerOverlay {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px 60px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
-.bannerTxt {
-    color: #fff;
-    font-size: 24px;
-    position: absolute;
-    left: 10%;
-    bottom: 15%;
-}
-.title {
-    padding: 124px 0 24px;
-    color: #07431E;
-    font-size: 40px;
+  
+.bannerOverlay h1 {
+    font-size: 32px;
     font-weight: bold;
+    margin: 0 0 20px;
+    letter-spacing: 1px;
+}
+  
+.bannerOverlay p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 960px;
+    margin: 0;
+}
+  
+.introBlock {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+  
+.introBlock .title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+  
+.chartRow {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+  
+.chartImage {
+    width: 320px;
+    height: auto;
+    border-radius: 6px;
+}
+  
+.descriptionGroup {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+  
+.section {
+    background-color: #f0f7f2;
+    padding: 60px 10px;
 }
 
-.findBox {
-    margin: 0 -64px;
-    padding: 0 64px 120px;
-    background-color: #E4EFE7;
-}
-
-.formWrap {
-    border: 2px solid #07431E;
-    width: 360px;
-    height: 56px;
-    border-radius: 28px;
-    margin-right: 32px;
-}
-.formWrap>div {
-    border: none !important;
-    border-radius: 28px !important;
-}
-.formWrap>span {
-    font-size: 24px !important;
-    margin-right: 12px;
-}
-.searchBtn {
-    width: 412px;
-    height: 56px;
-    border-radius: 60px;
-    background: #07431E;
+.sectionTitle {
     font-size: 28px;
     font-weight: bold;
     text-align: center;
-    line-height: 56px;
-    color: #fff;
-    cursor: pointer;
+    margin: 100px auto 40px;
+    max-width: 1200px;
+}
+  
+.carouselWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 60px;
+    max-width: 1200px;
+    position: relative;
+    padding: 0 16px;
+}
+  
+.arrowLeft,
+.arrowRight {
+  background: none; 
+  border: none;     
+  padding: 0;
+  cursor: pointer;
+  color: #07431E;  
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.searchCard {
-    width: 763px;
-    border-radius: 5px;
+.arrowLeft {
+  left: -20px;
+}
+
+.arrowRight {
+  right: -20px;
+}
+
+.arrowLeft:hover,
+.arrowRight:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+  
+.carouselViewport {
+    overflow: hidden;
+    flex: 1;
+    max-width: 960px;
+}
+  
+.carouselInner {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: fit-content;
+}
+  
+.carouselItem {
+    position: relative;
+    flex: 0 0 33.33%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 12px;
+}
+  
+.carouselItem img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+  
+.carouselItem:hover img {
+    transform: scale(1.05);
+}
+  
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+.carouselItem:hover .overlay {
+    opacity: 1;
+}
+  
+.overlay span {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 16px;
+}
+  
+.formWrap {
     border: 2px solid #07431E;
-    padding: 16px;
+    width: 400px;
+    height: 56px;
+    border-radius: 28px;
+    margin-right: 32px;
+    background: white;
+    padding: 0 16px;
+    font-size: 16px;
+}
+  
+.findBox {
     background-color: #fff;
-    margin-top: 24px;
+    border-radius: 24px;
+    padding: 48px 32px;
+    max-width: 1200px;
+    margin: 80px auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
-.searchRow {
-    border-bottom: 1px solid;
+  
+.findBox .title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #000;
+    text-align: left;
 }
-
+  
+.mapbox {
+    flex: 1;
+    height: 682px;
+}
+  
 .card {
     border: 2px solid #07431E;
-    height: 514px;
     border-radius: 10px;
     background-color: #fff;
     margin-top: 24px;
-    padding: 24px 64px;
-    overflow: hidden;
-    overflow-y: scroll;
+    padding: 24px;
+    overflow-y: auto;
     line-height: 1.5;
+    height: auto;
+    max-height: 620px;
+    text-align: left;
 }
-.card::-webkit-scrollbar {
-    width: 0;
-}
-.card::scrollbar {
-    width: 0;
-}
+  
 .card img {
-    width: 100%;
-    height: 450px;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
     object-fit: contain;
 }
+  
 .cartTitle {
     font-size: 24px;
     font-weight: bold;
-    margin: 42px 0 18px;
+    margin: 32px 0 18px;
 }
+  
 .card ul {
     padding: 0 6px 0 30px;
 }
+  
 .cardBtn {
     width: 241px;
     height: 56px;
@@ -130,49 +261,30 @@
     margin: 48px auto 0;
     cursor: pointer;
 }
-.mapbox {
-    width: 60%;
-    height: 682px;
-    margin-left: 20px;
-}
-.mapbox img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  
+.resultRow {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
 }
 
-.pointerWrap {
-    padding: 94px 0 0;
+.controlsRow {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
 }
-.regionBtn {
-    background: #E4EFE7;
-    width: 195px;
-    height: 56px;
-    border-radius: 60px;
-    text-align: center;
-    font-weight: 28px;
-    font-weight: bold;
-    line-height: 56px;
+  
+.resultsRow {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
 }
-.charts {
-    height: 512px;
-    background-color: #fff;
-}
-.charts img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.exportBtn {
-    width: 148px;
-    height: 56px;
-    border-radius: 60px;
-    font-size: 28px;
-    font-weight: bold;
-    line-height: 56px;
-    text-align: center;
-    color: #fff;
-    background-color: #F9CF39;
-    cursor: pointer;
+  
+.cardContainer {
+    flex: 0 0 300px;
 }
