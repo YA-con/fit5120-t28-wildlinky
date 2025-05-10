@@ -1,0 +1,4 @@
+pandas
+plotly
+geopandas
+psycopg2-binary
