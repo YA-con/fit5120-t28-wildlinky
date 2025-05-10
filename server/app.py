@@ -165,6 +165,33 @@ def get_species_timeseries():
     result = [{"year": year, "total": total} for year, total in sorted(year_totals.items())]
     return jsonify(result)
 
+import openai
+import os
+
+openai.api_key = "REMOVED"
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.get_json()
+    user_message = data.get('message', '')
+
+    if not user_message:
+        return jsonify({"error": "Missing message"}), 400
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.7
+        )
+        reply = response['choices'][0]['message']['content'].strip()
+        return jsonify({"reply": reply})
+    except Exception as e:
+        print(f"Error communicating with OpenAI: {e}")
+        return jsonify({"error": "Failed to get response"}), 500
+
 
 from geopy.distance import geodesic
 
@@ -252,4 +279,4 @@ def initialize_server_data():
 initialize_server_data()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='127.0.0.1', port=5000)
